@@ -39,7 +39,7 @@ namespace XAMARIN.OverviewOfTasksV2.Entity
             {
                 denText = "pátek";
             }
-            return "ID - " + ID + " Název předmětu - " + subjectNameFromDB[0].NazevPredmetu + ", " + denText + " " + Hodina + ".hodina";
+            return " Název předmětu: " + subjectNameFromDB[0].NazevPredmetu + ", " + denText + " " + Hodina + ".hodina";
         }
     }
 }

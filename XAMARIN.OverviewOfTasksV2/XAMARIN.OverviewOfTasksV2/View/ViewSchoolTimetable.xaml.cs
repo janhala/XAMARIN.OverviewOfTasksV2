@@ -30,10 +30,10 @@ namespace XAMARIN.OverviewOfTasksV2.View
             //selectedDateLabel.Text = String.Format("{0:d.M.yyyy}", datimeFirstDayInWeek);
             selectedDate = datimeToday.Date;
             int dayOfWeek = ((int)selectedDate.DayOfWeek == 0) ? 7 : (int)selectedDate.DayOfWeek;
-            selectedDate = selectedDate.AddDays(-dayOfWeek);
+            selectedDate = selectedDate.AddDays((-dayOfWeek) + 1);
 
             RefreshView(selectedDate);
-            
+
         }
 
         public static DateTime GetFirstDayOfWeek(DateTime dayInWeek)
@@ -66,13 +66,13 @@ namespace XAMARIN.OverviewOfTasksV2.View
 
         public void RefreshView(DateTime selectedDate)
         {
-            selectedDateLabel.Text = String.Format("{0:d.M.yyyy}", selectedDate);
+            //selectedDateLabel.Text = String.Format("{0:d.M.yyyy}", selectedDate);
 
-            endDate = selectedDate.AddDays(7);
+            endDate = selectedDate.AddDays(6);
             string startDateString = selectedDate.ToString("yyyy-MM-dd");
             string endDateString = endDate.ToString("yyyy-MM-dd");
 
-            selectedDateLabel.Text = selectedDate.ToString("dd-MM-yyyy") + " - " + endDate.ToString("dd-MM-yyyy");
+            selectedDateLabel.Text = selectedDate.ToString("d.M.yyyy") + " - " + endDate.ToString("d.M.yyyy");
 
             grouped = new ObservableCollection<GroupedViewModelUkolu>();
             var pondeliGroup = new GroupedViewModelUkolu() { LongName = "Pondělí", ShortName = "Pondělí" };
@@ -80,7 +80,6 @@ namespace XAMARIN.OverviewOfTasksV2.View
             var stredaGroup = new GroupedViewModelUkolu() { LongName = "Středa", ShortName = "Středa" };
             var ctvrtekGroup = new GroupedViewModelUkolu() { LongName = "Čtvrtek", ShortName = "Čtvrtek" };
             var patekGroup = new GroupedViewModelUkolu() { LongName = "Pátek", ShortName = "Pátek" };
-            //pondeliGroup.Add(new SeznamUkolu() { Name = "banana", Comment = "available in chip form factor" });
 
             var seznamUkolu = App.Database.GetItemsNotDoneAsyncSeznamUkolu(startDateString, endDateString).Result;
             foreach (SeznamUkolu objUkol in seznamUkolu)
@@ -88,9 +87,11 @@ namespace XAMARIN.OverviewOfTasksV2.View
                 var dayFromSubjectsList = App.Database.GetItemsNotDoneAsyncPredmetyVRozvrhuDen(objUkol.UmisteniUkolu_ID).Result;
                 if (dayFromSubjectsList.Count > 0)
                 {
+                    var nazevPredmetuDb = App.Database.GetItemsNotDoneAsync(dayFromSubjectsList[0].NazevPredmetu_ID).Result;
+
                     if (dayFromSubjectsList[0].Den == 1)
                     {
-                        pondeliGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
+                        pondeliGroup.Add(new SeznamUkolu() { Name = objUkol.Name + "( " + nazevPredmetuDb[0].NazevPredmetu + ", " + dayFromSubjectsList[0].Hodina + ".hodina )", Comment = objUkol.Comment });
                     }
                     if (dayFromSubjectsList[0].Den == 2)
                     {
@@ -123,8 +124,17 @@ namespace XAMARIN.OverviewOfTasksV2.View
         private void lstView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             /*SeznamUkolu ukol = new SeznamUkolu();
-            ukol = lstView.SelectedItem;*/
-            
+            object ukolObj = e.SelectedItem;
+            ukol = ukolObj;*/
+
+            var firstSelectedItem = e.SelectedItem;
+
+            /*SeznamUkolu ukol = new SeznamUkolu();
+            ukol = ((ListView)sender).SelectedItem;*/
+            //SeznamUkolu ukol = ((ListView)sender).SelectedItem;
+
+            // nepodarilo se mi vyresit, pokud by byl termin na opravy tak dodelam
+
         }
     }
 }

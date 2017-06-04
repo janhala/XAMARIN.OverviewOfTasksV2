@@ -17,7 +17,16 @@ namespace XAMARIN.OverviewOfTasksV2
 
             //MainPage = new XAMARIN.OverviewOfTasksV2.MainPage();
 
-            MainPage = new XAMARIN.OverviewOfTasksV2.View.EnterSubjects();
+            var subjectInTimetableFromDb = App.Database.GetItemsAsyncPredmetyVRozvrhu().Result;
+            if (subjectInTimetableFromDb.Count > 0)
+            {
+                MainPage = new XAMARIN.OverviewOfTasksV2.View.ViewSchoolTimetable();
+            }
+            else
+            {
+                MainPage = new XAMARIN.OverviewOfTasksV2.View.EnterSubjects();
+            }
+
         }
 
         protected override void OnStart()
@@ -43,7 +52,7 @@ namespace XAMARIN.OverviewOfTasksV2
             {
                 if (_database == null)
                 {
-                    _database = new TodoItemDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("SQLiteDatabase9.db3"));
+                    _database = new TodoItemDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("SQLiteDatabase11.db3"));
                 }
                 return _database;
             }

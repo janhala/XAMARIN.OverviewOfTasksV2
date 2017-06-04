@@ -83,7 +83,7 @@ namespace XAMARIN.OverviewOfTasksV2.Entity
 
         public Task<List<PredmetyVRozvrhu>> GetItemsNotDoneAsyncPredmetyVRozvrhuDen(int id)
         {
-            return database.QueryAsync<PredmetyVRozvrhu>("SELECT Den FROM PredmetyVRozvrhu WHERE ID = " + id + "");
+            return database.QueryAsync<PredmetyVRozvrhu>("SELECT Den, NazevPredmetu_ID, Hodina FROM PredmetyVRozvrhu WHERE ID = " + id + "");
         }
 
         public Task<List<PredmetyVRozvrhu>> GetItemsAsyncPredmetyVRozvrhu()

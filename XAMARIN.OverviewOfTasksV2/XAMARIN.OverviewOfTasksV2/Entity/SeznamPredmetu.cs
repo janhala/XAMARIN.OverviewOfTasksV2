@@ -14,7 +14,7 @@ namespace XAMARIN.OverviewOfTasksV2.Entity
         public string NazevPredmetu { get; set; }
         public override string ToString()
         {
-            return "ID - " + ID + " Název předmětu - " + NazevPredmetu;
+            return " Název předmětu: " + NazevPredmetu;
         }
     }
 }
