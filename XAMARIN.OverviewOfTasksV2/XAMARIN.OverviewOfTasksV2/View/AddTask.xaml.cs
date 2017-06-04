@@ -22,15 +22,18 @@ namespace XAMARIN.OverviewOfTasksV2.View
         public AddTask()
         {
             InitializeComponent();
+
+            UmisteniUkolu_ID_fromPicker = 0;
         }
 
         private void SaveTask(object sender, EventArgs e)
         {
             SeznamUkolu seznamUkolu = new SeznamUkolu();
             
-            if (nazevUkolu.Text == null || nazevUkolu.Text == " " || nazevUkolu.Text == "" || UmisteniUkolu_ID_fromPicker == null)
+            if (nazevUkolu.Text == null || nazevUkolu.Text == " " || nazevUkolu.Text == "" || UmisteniUkolu_ID_fromPicker == 0)
             {
-
+                warningText.Text = "Nejprve zadejte název předmětu, vyberte datum úkolu a přiřaďte ho k příslušné hodině!";
+                warningText.IsVisible = true;
             } else
             {
                 seznamUkolu.Name = nazevUkolu.Text;

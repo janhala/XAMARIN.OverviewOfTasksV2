@@ -79,133 +79,140 @@ namespace XAMARIN.OverviewOfTasksV2.View
 
         private void SaveAll(object sender, EventArgs e)
         {
-            int den = 1;
-            int hodina = 0;
-            foreach (object child in PondeliStackLayout.Children)
+            if (HodinVPondeli > 0 || HodinVUtery > 0 || HodinVeStredu > 0 || HodinVeCtvrtek > 0 || HodinVPatek > 0)
             {
-                int pickerSelectedItem = 0;
-                if (child is BindablePicker && child != null)
+                int den = 1;
+                int hodina = 0;
+                foreach (object child in PondeliStackLayout.Children)
                 {
-                    hodina = hodina + 1;
-                    if ((child as BindablePicker).SelectedItem != null)
+                    int pickerSelectedItem = 0;
+                    if (child is BindablePicker && child != null)
                     {
-                        pickerSelectedItem = ((SeznamPredmetu)((child as BindablePicker).SelectedItem)).ID;
-                    }
-                    else
-                    {
-                        pickerSelectedItem = 1;
-                    }
+                        hodina = hodina + 1;
+                        if ((child as BindablePicker).SelectedItem != null)
+                        {
+                            pickerSelectedItem = ((SeznamPredmetu)((child as BindablePicker).SelectedItem)).ID;
+                        }
+                        else
+                        {
+                            pickerSelectedItem = 1;
+                        }
 
-                    PredmetyVRozvrhu predmetyVRozvrhu = new PredmetyVRozvrhu();
-                    predmetyVRozvrhu.NazevPredmetu_ID = pickerSelectedItem;
-                    predmetyVRozvrhu.Den = den;
-                    predmetyVRozvrhu.Hodina = hodina;
-                    App.Database.SaveItemAsync(predmetyVRozvrhu);
-                }
-            }
-
-            den = 2;
-            hodina = 0;
-            foreach (object child in UteryStackLayout.Children)
-            {
-                int pickerSelectedItem = 0;
-                if (child is BindablePicker && child != null)
-                {
-                    hodina = hodina + 1;
-                    if ((child as BindablePicker).SelectedItem != null)
-                    {
-                        pickerSelectedItem = ((SeznamPredmetu)((child as BindablePicker).SelectedItem)).ID;
+                        PredmetyVRozvrhu predmetyVRozvrhu = new PredmetyVRozvrhu();
+                        predmetyVRozvrhu.NazevPredmetu_ID = pickerSelectedItem;
+                        predmetyVRozvrhu.Den = den;
+                        predmetyVRozvrhu.Hodina = hodina;
+                        App.Database.SaveItemAsync(predmetyVRozvrhu);
                     }
-                    else
-                    {
-                        pickerSelectedItem = 1;
-                    }
-
-                    PredmetyVRozvrhu predmetyVRozvrhu = new PredmetyVRozvrhu();
-                    predmetyVRozvrhu.NazevPredmetu_ID = pickerSelectedItem;
-                    predmetyVRozvrhu.Den = den;
-                    predmetyVRozvrhu.Hodina = hodina;
-                    App.Database.SaveItemAsync(predmetyVRozvrhu);
-                }
-            }
-
-            den = 3;
-            hodina = 0;
-            foreach (object child in StredaStackLayout.Children)
-            {
-                int pickerSelectedItem = 0;
-                if (child is BindablePicker && child != null)
-                {
-                    hodina = hodina + 1;
-                    if ((child as BindablePicker).SelectedItem != null)
-                    {
-                        pickerSelectedItem = ((SeznamPredmetu)((child as BindablePicker).SelectedItem)).ID;
-                    }
-                    else
-                    {
-                        pickerSelectedItem = 1;
-                    }
-
-                    PredmetyVRozvrhu predmetyVRozvrhu = new PredmetyVRozvrhu();
-                    predmetyVRozvrhu.NazevPredmetu_ID = pickerSelectedItem;
-                    predmetyVRozvrhu.Den = den;
-                    predmetyVRozvrhu.Hodina = hodina;
-                    App.Database.SaveItemAsync(predmetyVRozvrhu);
-                }
-            }
-            den = 4;
-            hodina = 0;
-            foreach (object child in CtvrtekStackLayout.Children)
-            {
-                int pickerSelectedItem = 0;
-                if (child is BindablePicker && child != null)
-                {
-                    hodina = hodina + 1;
-                    if ((child as BindablePicker).SelectedItem != null)
-                    {
-                        pickerSelectedItem = ((SeznamPredmetu)((child as BindablePicker).SelectedItem)).ID;
-                    }
-                    else
-                    {
-                        pickerSelectedItem = 1;
-                    }
-
-                    PredmetyVRozvrhu predmetyVRozvrhu = new PredmetyVRozvrhu();
-                    predmetyVRozvrhu.NazevPredmetu_ID = pickerSelectedItem;
-                    predmetyVRozvrhu.Den = den;
-                    predmetyVRozvrhu.Hodina = hodina;
-                    App.Database.SaveItemAsync(predmetyVRozvrhu);
-                }
-            }
-
-            den = 5;
-            hodina = 0;
-            foreach (object child in PatekStackLayout.Children)
-            {
-                int pickerSelectedItem = 0;
-                if (child is BindablePicker && child != null)
-                {
-                    hodina = hodina + 1;
-                    if ((child as BindablePicker).SelectedItem != null)
-                    {
-                        pickerSelectedItem = ((SeznamPredmetu)((child as BindablePicker).SelectedItem)).ID;
-                    }
-                    else
-                    {
-                        pickerSelectedItem = 1;
-                    }
-
-                    PredmetyVRozvrhu predmetyVRozvrhu = new PredmetyVRozvrhu();
-                    predmetyVRozvrhu.NazevPredmetu_ID = pickerSelectedItem;
-                    predmetyVRozvrhu.Den = den;
-                    predmetyVRozvrhu.Hodina = hodina;
-                    App.Database.SaveItemAsync(predmetyVRozvrhu);
                 }
 
+                den = 2;
+                hodina = 0;
+                foreach (object child in UteryStackLayout.Children)
+                {
+                    int pickerSelectedItem = 0;
+                    if (child is BindablePicker && child != null)
+                    {
+                        hodina = hodina + 1;
+                        if ((child as BindablePicker).SelectedItem != null)
+                        {
+                            pickerSelectedItem = ((SeznamPredmetu)((child as BindablePicker).SelectedItem)).ID;
+                        }
+                        else
+                        {
+                            pickerSelectedItem = 1;
+                        }
 
+                        PredmetyVRozvrhu predmetyVRozvrhu = new PredmetyVRozvrhu();
+                        predmetyVRozvrhu.NazevPredmetu_ID = pickerSelectedItem;
+                        predmetyVRozvrhu.Den = den;
+                        predmetyVRozvrhu.Hodina = hodina;
+                        App.Database.SaveItemAsync(predmetyVRozvrhu);
+                    }
+                }
+
+                den = 3;
+                hodina = 0;
+                foreach (object child in StredaStackLayout.Children)
+                {
+                    int pickerSelectedItem = 0;
+                    if (child is BindablePicker && child != null)
+                    {
+                        hodina = hodina + 1;
+                        if ((child as BindablePicker).SelectedItem != null)
+                        {
+                            pickerSelectedItem = ((SeznamPredmetu)((child as BindablePicker).SelectedItem)).ID;
+                        }
+                        else
+                        {
+                            pickerSelectedItem = 1;
+                        }
+
+                        PredmetyVRozvrhu predmetyVRozvrhu = new PredmetyVRozvrhu();
+                        predmetyVRozvrhu.NazevPredmetu_ID = pickerSelectedItem;
+                        predmetyVRozvrhu.Den = den;
+                        predmetyVRozvrhu.Hodina = hodina;
+                        App.Database.SaveItemAsync(predmetyVRozvrhu);
+                    }
+                }
+                den = 4;
+                hodina = 0;
+                foreach (object child in CtvrtekStackLayout.Children)
+                {
+                    int pickerSelectedItem = 0;
+                    if (child is BindablePicker && child != null)
+                    {
+                        hodina = hodina + 1;
+                        if ((child as BindablePicker).SelectedItem != null)
+                        {
+                            pickerSelectedItem = ((SeznamPredmetu)((child as BindablePicker).SelectedItem)).ID;
+                        }
+                        else
+                        {
+                            pickerSelectedItem = 1;
+                        }
+
+                        PredmetyVRozvrhu predmetyVRozvrhu = new PredmetyVRozvrhu();
+                        predmetyVRozvrhu.NazevPredmetu_ID = pickerSelectedItem;
+                        predmetyVRozvrhu.Den = den;
+                        predmetyVRozvrhu.Hodina = hodina;
+                        App.Database.SaveItemAsync(predmetyVRozvrhu);
+                    }
+                }
+
+                den = 5;
+                hodina = 0;
+                foreach (object child in PatekStackLayout.Children)
+                {
+                    int pickerSelectedItem = 0;
+                    if (child is BindablePicker && child != null)
+                    {
+                        hodina = hodina + 1;
+                        if ((child as BindablePicker).SelectedItem != null)
+                        {
+                            pickerSelectedItem = ((SeznamPredmetu)((child as BindablePicker).SelectedItem)).ID;
+                        }
+                        else
+                        {
+                            pickerSelectedItem = 1;
+                        }
+
+                        PredmetyVRozvrhu predmetyVRozvrhu = new PredmetyVRozvrhu();
+                        predmetyVRozvrhu.NazevPredmetu_ID = pickerSelectedItem;
+                        predmetyVRozvrhu.Den = den;
+                        predmetyVRozvrhu.Hodina = hodina;
+                        App.Database.SaveItemAsync(predmetyVRozvrhu);
+                    }
+
+
+                }
+
+                NextPage();
+            } else
+            {
+                warningText.Text = "Nejprve přidejte jednotlivé hodiny a k nim následně přiřaďte předměty!!";
+                warningText.IsVisible = true;
             }
-
-            NextPage();
         }
 
         async void NextPage()

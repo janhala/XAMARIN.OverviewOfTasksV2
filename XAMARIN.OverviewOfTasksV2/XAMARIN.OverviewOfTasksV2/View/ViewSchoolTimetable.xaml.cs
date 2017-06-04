@@ -41,25 +41,28 @@ namespace XAMARIN.OverviewOfTasksV2.View
             foreach (SeznamUkolu objUkol in seznamUkolu)
             {
                 var dayFromSubjectsList = App.Database.GetItemsNotDoneAsyncPredmetyVRozvrhuDen(objUkol.UmisteniUkolu_ID).Result;
-                if (dayFromSubjectsList[0].Den == 1)
+                if (dayFromSubjectsList.Count > 0)
                 {
-                    pondeliGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
-                }
-                if (dayFromSubjectsList[0].Den == 2)
-                {
-                    uteryGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
-                }
-                if (dayFromSubjectsList[0].Den == 3)
-                {
-                    stredaGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
-                }
-                if (dayFromSubjectsList[0].Den == 4)
-                {
-                    ctvrtekGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
-                }
-                if (dayFromSubjectsList[0].Den == 5)
-                {
-                    patekGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
+                    if (dayFromSubjectsList[0].Den == 1)
+                    {
+                        pondeliGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
+                    }
+                    if (dayFromSubjectsList[0].Den == 2)
+                    {
+                        uteryGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
+                    }
+                    if (dayFromSubjectsList[0].Den == 3)
+                    {
+                        stredaGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
+                    }
+                    if (dayFromSubjectsList[0].Den == 4)
+                    {
+                        ctvrtekGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
+                    }
+                    if (dayFromSubjectsList[0].Den == 5)
+                    {
+                        patekGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
+                    }
                 }
             }
 
@@ -103,6 +106,13 @@ namespace XAMARIN.OverviewOfTasksV2.View
         async void AddTaskFunction(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new AddTask());
+        }
+
+        private void lstView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            /*SeznamUkolu ukol = new SeznamUkolu();
+            ukol = lstView.SelectedItem;*/
+            
         }
     }
 }

@@ -60,6 +60,9 @@
     <Compile Include="View\ViewSchoolTimetable.xaml.cs">
       <DependentUpon>ViewSchoolTimetable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ViewTask.xaml.cs">
+      <DependentUpon>ViewTask.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainPage.xaml">
@@ -117,6 +120,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\AddTask.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\ViewTask.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

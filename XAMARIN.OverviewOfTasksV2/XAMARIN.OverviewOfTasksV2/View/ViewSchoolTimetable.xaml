@@ -4,11 +4,23 @@
              x:Class="XAMARIN.OverviewOfTasksV2.View.ViewSchoolTimetable"
              xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <StackLayout>
-        <Button Text="Předchozí týden" Clicked="PredchoziTyden" />
-        <Label x:Name="selectedDateLabel" />
-        <Button Text="Další týden" Clicked="DalsiTyden" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+
+            <Button Text="Předchozí týden" Clicked="PredchoziTyden" Grid.Column="0" Grid.Row="0"  />
+            <Label x:Name="selectedDateLabel" Grid.Column="1" Grid.Row="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+            <Button Text="Další týden" Clicked="DalsiTyden" Grid.Column="2" Grid.Row="0" />
+
+        </Grid>
         <Button Text="Přidat úkol" Clicked="AddTaskFunction" />
-        <ListView x:Name ="lstView" IsGroupingEnabled="true" GroupDisplayBinding="{Binding LongName}" GroupShortNameBinding="{Binding ShortName}">
+        <ListView x:Name ="lstView" IsGroupingEnabled="true" ItemSelected="lstView_ItemSelected" GroupDisplayBinding="{Binding LongName}" GroupShortNameBinding="{Binding ShortName}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding Name}" Detail = "{Binding Comment}" />

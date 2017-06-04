@@ -34,6 +34,7 @@
     <ContentPage Title="Pátek">
         <ScrollView Orientation="Vertical" VerticalOptions="StartAndExpand">
             <StackLayout x:Name="PatekStackLayout">
+                <Label BackgroundColor="Red" x:Name="warningText" IsVisible="False" />
                 <Button Clicked="SaveAll" Text="ULOŽIT VŠE A POKRAČOVAT" VerticalOptions="End" />
                 <Button Text="Přidat hodinu" Clicked="AddHourPatek" />
             </StackLayout>

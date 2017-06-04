@@ -43,7 +43,7 @@ namespace XAMARIN.OverviewOfTasksV2
             {
                 if (_database == null)
                 {
-                    _database = new TodoItemDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("SQLiteDatabase7.db3"));
+                    _database = new TodoItemDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("SQLiteDatabase9.db3"));
                 }
                 return _database;
             }

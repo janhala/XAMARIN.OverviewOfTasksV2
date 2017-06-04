@@ -4,7 +4,8 @@
              x:Class="XAMARIN.OverviewOfTasksV2.View.AddTask"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:controls="clr-namespace:XAMARIN.OverviewOfTasksV2.Controls;assembly=XAMARIN.OverviewOfTasks">
-    <StackLayout x:Name="addTaskLayout">
+    <StackLayout x:Name="addTaskLayout" Orientation="Vertical" VerticalOptions="Start">
+        <Label BackgroundColor="Red" x:Name="warningText" IsVisible="False" />
         <Entry Placeholder="Zadejte název úkolu" x:Name="nazevUkolu" />
         <Entry Placeholder="Zadejte popis úkolu" x:Name="popisUkolu" />
         <DatePicker x:Name="datepicker" DateSelected="datepicker_DateSelected">
