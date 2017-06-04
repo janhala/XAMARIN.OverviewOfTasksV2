@@ -108,5 +108,10 @@ namespace XAMARIN.OverviewOfTasksV2.Entity
         {
             return database.Table<SeznamUkolu>().ToListAsync();
         }
+
+        public Task<List<SeznamUkolu>> GetItemsNotDoneAsyncSeznamUkolu(string startDate, string endDate)
+        {
+            return database.QueryAsync<SeznamUkolu>("SELECT * FROM SeznamUkolu WHERE date BETWEEN '" + startDate + "' AND '" + endDate + "'");
+        }
     }
 }

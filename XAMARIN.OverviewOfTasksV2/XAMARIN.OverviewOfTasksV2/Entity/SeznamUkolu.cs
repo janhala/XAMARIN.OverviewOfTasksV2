@@ -15,7 +15,7 @@ namespace XAMARIN.OverviewOfTasksV2.Entity
         public string Name { get; set; }
         public string Comment { get; set; }
         public int UmisteniUkolu_ID { get; set; } //ID from PredmetyVRozvrhu
-        //public DateTime date { get; set; }
+        public string date { get; set; }
         public SeznamUkolu()
         {
         }

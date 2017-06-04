@@ -39,6 +39,7 @@ namespace XAMARIN.OverviewOfTasksV2.View
                 seznamUkolu.Name = nazevUkolu.Text;
                 seznamUkolu.UmisteniUkolu_ID = UmisteniUkolu_ID_fromPicker;
                 seznamUkolu.Comment = popisUkolu.Text;
+                seznamUkolu.date = datepicker.Date.ToString("yyyy-MM-dd");
                 App.Database.SaveItemAsync(seznamUkolu);
 
                 ViewSchoolTimetableFunction();
