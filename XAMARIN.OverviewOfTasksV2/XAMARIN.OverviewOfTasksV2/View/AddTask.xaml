@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XAMARIN.OverviewOfTasksV2.View.AddTask"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:controls="clr-namespace:XAMARIN.OverviewOfTasksV2.Controls;assembly=XAMARIN.OverviewOfTasks">
+    <StackLayout x:Name="addTaskLayout">
+        <Entry Placeholder="Zadejte název úkolu" x:Name="nazevUkolu" />
+        <Entry Placeholder="Zadejte popis úkolu" x:Name="popisUkolu" />
+        <DatePicker x:Name="datepicker" DateSelected="datepicker_DateSelected">
+            <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+            <DatePicker.MinimumDate>
+                <sys:DateTime x:FactoryMethod="Parse">
+                    <x:Arguments>
+                        <x:String>Jan 1 2000</x:String>
+                    </x:Arguments>
+                </sys:DateTime>
+            </DatePicker.MinimumDate>
+            <DatePicker.MaximumDate>
+                <sys:DateTime x:FactoryMethod="Parse">
+                    <x:Arguments>
+                        <x:String>Dec 31 2050</x:String>
+                    </x:Arguments>
+                </sys:DateTime>
+            </DatePicker.MaximumDate>
+        </DatePicker>
+        <Button Text="Uložit" Clicked="SaveTask" />
+    </StackLayout>
+</ContentPage>

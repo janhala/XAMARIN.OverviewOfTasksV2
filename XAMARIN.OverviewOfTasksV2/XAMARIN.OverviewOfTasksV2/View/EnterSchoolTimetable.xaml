@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XAMARIN.OverviewOfTasksV2.View.EnterSchoolTimetable">
+    <ContentPage Title="Pondělí">
+        <ScrollView Orientation="Vertical" VerticalOptions="StartAndExpand">
+            <StackLayout x:Name="PondeliStackLayout">
+                <Button Text="Přidat hodinu" Clicked="AddHourMonday" />
+                <!--<controls:BindablePicker x:Name="Pondeli1" ItemsSource="{Binding Path=HoursList}" />-->
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+    <ContentPage Title="Úterý">
+        <ScrollView Orientation="Vertical" VerticalOptions="StartAndExpand">
+            <StackLayout x:Name="UteryStackLayout">
+                <Button Text="Přidat hodinu" Clicked="AddHourUtery" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+    <ContentPage Title="Středa">
+        <ScrollView Orientation="Vertical" VerticalOptions="StartAndExpand">
+            <StackLayout x:Name="StredaStackLayout">
+                <Button Text="Přidat hodinu" Clicked="AddHourStreda" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+    <ContentPage Title="Čtvrtek">
+        <ScrollView Orientation="Vertical" VerticalOptions="StartAndExpand">
+            <StackLayout x:Name="CtvrtekStackLayout">
+                <Button Text="Přidat hodinu" Clicked="AddHourCtvrtek" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+    <ContentPage Title="Pátek">
+        <ScrollView Orientation="Vertical" VerticalOptions="StartAndExpand">
+            <StackLayout x:Name="PatekStackLayout">
+                <Button Clicked="SaveAll" Text="ULOŽIT VŠE A POKRAČOVAT" VerticalOptions="End" />
+                <Button Text="Přidat hodinu" Clicked="AddHourPatek" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+</TabbedPage>

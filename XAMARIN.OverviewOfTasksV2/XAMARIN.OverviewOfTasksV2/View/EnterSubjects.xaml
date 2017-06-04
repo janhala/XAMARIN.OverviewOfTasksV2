@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XAMARIN.OverviewOfTasksV2.View.EnterSubjects">
+    <Grid>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="50" />
+        <RowDefinition Height="50" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <ScrollView Orientation="Vertical" VerticalOptions="StartAndExpand" Grid.Row="0" Grid.Column="0">
+        <StackLayout x:Name="StackLayoutMap">
+            <Label Text="Zadejte jednotlivě všechny hodiny, které jsou na vaší škole vyučovány a poté klikněte na POKRAČOVAT:" />
+            <Label BackgroundColor="Red" x:Name="warningText" IsVisible="False" />
+        </StackLayout>
+    </ScrollView>
+    <Button Text="POKRAČOVAT" Clicked="NextPage" BackgroundColor="Green" Grid.Row="2" Grid.Column="0" />
+    </Grid>
+</ContentPage>
