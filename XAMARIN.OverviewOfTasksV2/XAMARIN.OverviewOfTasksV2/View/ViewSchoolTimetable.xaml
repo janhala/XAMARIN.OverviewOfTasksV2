@@ -11,7 +11,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
+                <RowDefinition Height="70" />
             </Grid.RowDefinitions>
 
             <Button Text="Předchozí týden" Clicked="PredchoziTyden" Grid.Column="0" Grid.Row="0"  />

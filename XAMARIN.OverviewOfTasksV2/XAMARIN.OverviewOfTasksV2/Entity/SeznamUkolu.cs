@@ -19,6 +19,14 @@ namespace XAMARIN.OverviewOfTasksV2.Entity
         public SeznamUkolu()
         {
         }
+
+        /*public override string ToString()
+        {
+            var hourFromDB = App.Database.GetHourFromPredmetyVRozvrhu(UmisteniUkolu_ID).Result;
+            var subjectFromDB = App.Database.GetItemsNotDoneAsync(hourFromDB[0].NazevPredmetu_ID).Result;
+
+            return subjectFromDB[0].NazevPredmetu + ", " + hourFromDB[0].Hodina + ".hodina";
+        }*/
     }
 
     public class GroupedViewModelUkolu : ObservableCollection<SeznamUkolu>

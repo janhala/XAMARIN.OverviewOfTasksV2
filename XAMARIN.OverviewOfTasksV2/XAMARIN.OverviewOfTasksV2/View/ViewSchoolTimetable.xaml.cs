@@ -25,15 +25,12 @@ namespace XAMARIN.OverviewOfTasksV2.View
 
 
             System.DateTime datimeToday = DateTime.Now;
-            //int dayOfWeek = (int)DateTime.Today.DayOfWeek;
-            //System.DateTime datimeFirstDayInWeek = GetFirstDayOfWeek(datimeToday);
-            //selectedDateLabel.Text = String.Format("{0:d.M.yyyy}", datimeFirstDayInWeek);
             selectedDate = datimeToday.Date;
             int dayOfWeek = ((int)selectedDate.DayOfWeek == 0) ? 7 : (int)selectedDate.DayOfWeek;
-            selectedDate = selectedDate.AddDays(-dayOfWeek);
+            selectedDate = selectedDate.AddDays((-dayOfWeek) + 1);
 
             RefreshView(selectedDate);
-            
+
         }
 
         public static DateTime GetFirstDayOfWeek(DateTime dayInWeek)
@@ -66,13 +63,11 @@ namespace XAMARIN.OverviewOfTasksV2.View
 
         public void RefreshView(DateTime selectedDate)
         {
-            selectedDateLabel.Text = String.Format("{0:d.M.yyyy}", selectedDate);
-
-            endDate = selectedDate.AddDays(7);
+            endDate = selectedDate.AddDays(6);
             string startDateString = selectedDate.ToString("yyyy-MM-dd");
             string endDateString = endDate.ToString("yyyy-MM-dd");
 
-            selectedDateLabel.Text = selectedDate.ToString("dd-MM-yyyy") + " - " + endDate.ToString("dd-MM-yyyy");
+            selectedDateLabel.Text = selectedDate.ToString("d.M.yyyy") + " - " + endDate.ToString("d.M.yyyy");
 
             grouped = new ObservableCollection<GroupedViewModelUkolu>();
             var pondeliGroup = new GroupedViewModelUkolu() { LongName = "Pondělí", ShortName = "Pondělí" };
@@ -80,33 +75,36 @@ namespace XAMARIN.OverviewOfTasksV2.View
             var stredaGroup = new GroupedViewModelUkolu() { LongName = "Středa", ShortName = "Středa" };
             var ctvrtekGroup = new GroupedViewModelUkolu() { LongName = "Čtvrtek", ShortName = "Čtvrtek" };
             var patekGroup = new GroupedViewModelUkolu() { LongName = "Pátek", ShortName = "Pátek" };
-            //pondeliGroup.Add(new SeznamUkolu() { Name = "banana", Comment = "available in chip form factor" });
 
             var seznamUkolu = App.Database.GetItemsNotDoneAsyncSeznamUkolu(startDateString, endDateString).Result;
             foreach (SeznamUkolu objUkol in seznamUkolu)
             {
                 var dayFromSubjectsList = App.Database.GetItemsNotDoneAsyncPredmetyVRozvrhuDen(objUkol.UmisteniUkolu_ID).Result;
+
+                var hourFromDB = App.Database.GetHourFromPredmetyVRozvrhu(objUkol.UmisteniUkolu_ID).Result;
+                var subjectFromDB = App.Database.GetItemsNotDoneAsync(hourFromDB[0].NazevPredmetu_ID).Result;
+
                 if (dayFromSubjectsList.Count > 0)
                 {
                     if (dayFromSubjectsList[0].Den == 1)
                     {
-                        pondeliGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
+                        pondeliGroup.Add(new SeznamUkolu() { Name = objUkol.Name + " | " + subjectFromDB[0].NazevPredmetu + ", " + hourFromDB[0].Hodina + ".hodina", Comment = objUkol.Comment, ID = objUkol.ID, date = objUkol.date, UmisteniUkolu_ID = objUkol.UmisteniUkolu_ID });
                     }
                     if (dayFromSubjectsList[0].Den == 2)
                     {
-                        uteryGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
+                        uteryGroup.Add(new SeznamUkolu() { Name = objUkol.Name + " | " + subjectFromDB[0].NazevPredmetu + ", " + hourFromDB[0].Hodina + ".hodina", Comment = objUkol.Comment, ID = objUkol.ID, date = objUkol.date, UmisteniUkolu_ID = objUkol.UmisteniUkolu_ID });
                     }
                     if (dayFromSubjectsList[0].Den == 3)
                     {
-                        stredaGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
+                        stredaGroup.Add(new SeznamUkolu() { Name = objUkol.Name + " | " + subjectFromDB[0].NazevPredmetu + ", " + hourFromDB[0].Hodina + ".hodina", Comment = objUkol.Comment, ID = objUkol.ID, date = objUkol.date, UmisteniUkolu_ID = objUkol.UmisteniUkolu_ID });
                     }
                     if (dayFromSubjectsList[0].Den == 4)
                     {
-                        ctvrtekGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
+                        ctvrtekGroup.Add(new SeznamUkolu() { Name = objUkol.Name + " | " + subjectFromDB[0].NazevPredmetu + ", " + hourFromDB[0].Hodina + ".hodina", Comment = objUkol.Comment, ID = objUkol.ID, date = objUkol.date, UmisteniUkolu_ID = objUkol.UmisteniUkolu_ID });
                     }
                     if (dayFromSubjectsList[0].Den == 5)
                     {
-                        patekGroup.Add(new SeznamUkolu() { Name = objUkol.Name, Comment = objUkol.Comment });
+                        patekGroup.Add(new SeznamUkolu() { Name = objUkol.Name + " | " + subjectFromDB[0].NazevPredmetu + ", " + hourFromDB[0].Hodina + ".hodina", Comment = objUkol.Comment, ID = objUkol.ID, date = objUkol.date, UmisteniUkolu_ID = objUkol.UmisteniUkolu_ID });
                     }
                 }
             }
@@ -122,9 +120,17 @@ namespace XAMARIN.OverviewOfTasksV2.View
 
         private void lstView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            /*SeznamUkolu ukol = new SeznamUkolu();
-            ukol = lstView.SelectedItem;*/
-            
+            var SelectedItem = e.SelectedItem;
+
+            SeznamUkolu ukol = e.SelectedItem as SeznamUkolu;
+            var tst = ukol.ID;
+
+            ViewTaskFunction(ukol);
+        }
+
+        async void ViewTaskFunction(SeznamUkolu ukol)
+        {
+            await Navigation.PushModalAsync(new ViewTask(ukol));
         }
     }
 }

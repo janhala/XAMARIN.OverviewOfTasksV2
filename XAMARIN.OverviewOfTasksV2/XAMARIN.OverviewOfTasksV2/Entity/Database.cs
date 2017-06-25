@@ -58,7 +58,24 @@ namespace XAMARIN.OverviewOfTasksV2.Entity
             }
         }
 
+        public Task<int> SaveItemAsyncSeznamUkolu(SeznamUkolu item)
+        {
+            if (item.ID != 0)
+            {
+                return database.UpdateAsync(item);
+            }
+            else
+            {
+                return database.InsertAsync(item);
+            }
+        }
+
         public Task<int> DeleteItemAsync(SeznamPredmetu item)
+        {
+            return database.DeleteAsync(item);
+        }
+
+        public Task<int> DeleteItemAsync(SeznamUkolu item)
         {
             return database.DeleteAsync(item);
         }
@@ -83,7 +100,7 @@ namespace XAMARIN.OverviewOfTasksV2.Entity
 
         public Task<List<PredmetyVRozvrhu>> GetItemsNotDoneAsyncPredmetyVRozvrhuDen(int id)
         {
-            return database.QueryAsync<PredmetyVRozvrhu>("SELECT Den FROM PredmetyVRozvrhu WHERE ID = " + id + "");
+            return database.QueryAsync<PredmetyVRozvrhu>("SELECT * FROM PredmetyVRozvrhu WHERE ID = " + id + "");
         }
 
         public Task<List<PredmetyVRozvrhu>> GetItemsAsyncPredmetyVRozvrhu()
@@ -112,6 +129,11 @@ namespace XAMARIN.OverviewOfTasksV2.Entity
         public Task<List<SeznamUkolu>> GetItemsNotDoneAsyncSeznamUkolu(string startDate, string endDate)
         {
             return database.QueryAsync<SeznamUkolu>("SELECT * FROM SeznamUkolu WHERE date BETWEEN '" + startDate + "' AND '" + endDate + "'");
+        }
+
+        public Task<List<PredmetyVRozvrhu>> GetHourFromPredmetyVRozvrhu(int id_seznamUkolu)
+        {
+            return database.QueryAsync<PredmetyVRozvrhu>("SELECT PredmetyVRozvrhu.Hodina, PredmetyVRozvrhu.NazevPredmetu_ID FROM PredmetyVRozvrhu LEFT JOIN SeznamUkolu ON PredmetyVRozvrhu.ID = SeznamUkolu.UmisteniUkolu_ID WHERE SeznamUkolu.UmisteniUkolu_ID = " + id_seznamUkolu);
         }
     }
 }

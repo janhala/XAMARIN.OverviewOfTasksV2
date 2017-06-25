@@ -24,6 +24,14 @@ namespace XAMARIN.OverviewOfTasksV2.View
             InitializeComponent();
 
             UmisteniUkolu_ID_fromPicker = 0;
+
+            date = DateTime.Now;
+            int dayInWeekNumber = (int)date.DayOfWeek;
+            if (dayInWeekNumber == 0)
+            {
+                dayInWeekNumber = 7;
+            }
+            refreshPicker(dayInWeekNumber);
         }
 
         private void SaveTask(object sender, EventArgs e)
@@ -62,7 +70,7 @@ namespace XAMARIN.OverviewOfTasksV2.View
         {
             if (picker != null)
             {
-                addTaskLayout.Children.Remove(picker);
+                pickerLayout.Children.Remove(picker);
             }
             var subjectsFromDb = App.Database.GetItemsNotDoneAsyncPredmetyVRozvrhu(denVtydnu).Result;
             if (subjectsFromDb != null)
@@ -70,7 +78,7 @@ namespace XAMARIN.OverviewOfTasksV2.View
                 SubjectList = subjectsFromDb;
                 picker.ItemsSource = SubjectList;
                 picker.ItemSelected += PickerSelected;
-                addTaskLayout.Children.Add(picker);
+                pickerLayout.Children.Add(picker);
             }
 
         }
