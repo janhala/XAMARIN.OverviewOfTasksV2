@@ -37,12 +37,13 @@ namespace XAMARIN.OverviewOfTasksV2.View
         private void SaveTask(object sender, EventArgs e)
         {
             SeznamUkolu seznamUkolu = new SeznamUkolu();
-            
+
             if (nazevUkolu.Text == null || nazevUkolu.Text == " " || nazevUkolu.Text == "" || UmisteniUkolu_ID_fromPicker == 0)
             {
                 warningText.Text = "Nejprve zadejte název předmětu, vyberte datum úkolu a přiřaďte ho k příslušné hodině!";
                 warningText.IsVisible = true;
-            } else
+            }
+            else
             {
                 seznamUkolu.Name = nazevUkolu.Text;
                 seznamUkolu.UmisteniUkolu_ID = UmisteniUkolu_ID_fromPicker;
@@ -52,7 +53,7 @@ namespace XAMARIN.OverviewOfTasksV2.View
 
                 ViewSchoolTimetableFunction();
             }
-            
+
         }
 
         private void datepicker_DateSelected(object sender, DateChangedEventArgs e)
